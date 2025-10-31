@@ -1,6 +1,4 @@
-﻿using Catalog.API.Products.CreateProduct;
-
-namespace Catalog.API.Products.UpdateProduct;
+﻿namespace Catalog.API.Products.UpdateProduct;
 
 public record UpdateProductCommand(Guid Id, string Name, List<string> Category, string Description, string ImageFile, decimal Price) 
     : ICommand<UpdateProductResult>;
@@ -18,7 +16,7 @@ public class UpdateProductCommandValidator : AbstractValidator<UpdateProductComm
         RuleFor(x => x.ImageFile).NotEmpty().WithMessage("ImageFile is required.");
         RuleFor(x => x.Price).GreaterThan(0).WithMessage("Price must be greater than 0.");
     }
-
+}
 
     internal class UpdateProductCommandHandler(IDocumentSession session, ILogger<UpdateProductCommandHandler> logger) 
     : ICommandHandler<UpdateProductCommand, UpdateProductResult>
@@ -28,7 +26,7 @@ public class UpdateProductCommandValidator : AbstractValidator<UpdateProductComm
         logger.LogInformation("UpdateProductCommandHandler.Handle called with {@Command}", command);
 
         var product = await session.LoadAsync<Product>(command.Id, cancellationToken) 
-            ?? throw new ProductNotFoundException();
+            ?? throw new ProductNotFoundException(command.Id);
 
         product.Name = command.Name;
         product.Category = command.Category;
