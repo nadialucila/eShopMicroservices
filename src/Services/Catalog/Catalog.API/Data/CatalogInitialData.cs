@@ -1,6 +1,4 @@
-﻿using Marten.Schema;
-
-namespace Catalog.API.Data;
+﻿namespace Catalog.API.Data;
 
 public class CatalogInitialData : IInitialData
 {
@@ -15,8 +13,8 @@ public class CatalogInitialData : IInitialData
         await session.SaveChangesAsync();
     }
 
-    private static IEnumerable<Product> GetPreconfiguredProducts() => new List<Product>()
-    {
+    private static IEnumerable<Product> GetPreconfiguredProducts() =>
+    [
         new Product()
         {
             Id = new Guid("a45b08dc-854e-4aeb-8515-65104ef73f16"),
@@ -24,7 +22,7 @@ public class CatalogInitialData : IInitialData
             Description = "Lorem ipsum dolor sit amet consectetur, adipiscing elit est laoreet non cum, habitant mauris montes posuere.",
             ImageFile = "product-1.png",
             Price = 100000,
-            Category = new List<string> {"Celular"}
+            Category = ["Celular"]
         },
         new Product()
         {
@@ -33,7 +31,7 @@ public class CatalogInitialData : IInitialData
             Description = "Lorem ipsum dolor sit amet consectetur, adipiscing elit est laoreet non cum, habitant mauris montes posuere.",
             ImageFile = "product-2.png",
             Price = 200000,
-            Category = new List<string> {"Celular"}
+            Category = ["Celular"]
         },
         new Product()
         {
@@ -42,7 +40,7 @@ public class CatalogInitialData : IInitialData
             Description = "Lorem ipsum dolor sit amet consectetur, adipiscing elit est laoreet non cum, habitant mauris montes posuere.",
             ImageFile = "product-3.png",
             Price = 7700000,
-            Category = new List<string> {"Celular"}
+            Category = ["Celular"]
         },
         new Product()
                 {
@@ -51,8 +49,8 @@ public class CatalogInitialData : IInitialData
             Description = "Lorem ipsum dolor sit amet consectetur, adipiscing elit est laoreet non cum, habitant mauris montes posuere.",
             ImageFile = "product-4.png",
             Price = 400000,
-            Category = new List<string> {"Celular"}
+            Category = ["Celular"]
         }
-    };
+    ];
 
 }
