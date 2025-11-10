@@ -22,6 +22,9 @@ void ConfigureServices(WebApplicationBuilder builder){
         //opts.Schema.For<ShoppingCart>().Identity(x => x.Username);
     }).UseLightweightSessions();
 
+    //repository                 
+    builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+
     builder.Services.AddMediatR(config =>
     {
         config.RegisterServicesFromAssembly(assembly);
