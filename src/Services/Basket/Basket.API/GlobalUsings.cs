@@ -8,3 +8,5 @@ global using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 global using Carter;
 global using Marten;
 global using Basket.API.Models;
+global using BuildingBlocks.Exceptions;
+global using Basket.API.Exceptions;

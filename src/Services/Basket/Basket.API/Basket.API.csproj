@@ -16,9 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="Dtos\" />
-    <Folder Include="Exceptions\" />
     <Folder Include="GrpcServices\" />
     <Folder Include="Protos\" />
   </ItemGroup>
