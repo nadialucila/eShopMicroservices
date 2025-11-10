@@ -18,6 +18,8 @@ void ConfigureServices(WebApplicationBuilder builder){
     builder.Services.AddMarten(opts =>
     {
         opts.Connection(database);
+        //another way to configure id
+        //opts.Schema.For<ShoppingCart>().Identity(x => x.Username);
     }).UseLightweightSessions();
 
     builder.Services.AddMediatR(config =>
