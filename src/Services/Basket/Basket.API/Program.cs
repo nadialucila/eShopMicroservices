@@ -32,6 +32,12 @@ void ConfigureServices(WebApplicationBuilder builder){
     //});
     builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
 
+    builder.Services.AddStackExchangeRedisCache(options =>
+    {
+        options.Configuration = builder.Configuration.GetConnectionString("Redis");
+        //options.IntanceName = "Basket";
+    });
+
     builder.Services.AddMediatR(config =>
     {
         config.RegisterServicesFromAssembly(assembly);
