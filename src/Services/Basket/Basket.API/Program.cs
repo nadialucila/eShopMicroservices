@@ -24,6 +24,13 @@ void ConfigureServices(WebApplicationBuilder builder){
 
     //repository                 
     builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+    //one way to register decorator
+    //builder.Services.AddScoped<IBasketRepository>(provider =>
+    //{
+    //    var basketRepository = provider.GetRequiredService<BasketRepository>();
+    //    return new CachedBasketRepository(basketRepository, provider.GetRequiredService<IDistributedCache>());
+    //});
+    builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
 
     builder.Services.AddMediatR(config =>
     {
