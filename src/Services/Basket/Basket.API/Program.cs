@@ -1,3 +1,6 @@
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Mvc.Formatters;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var assembly = typeof(Program).Assembly;
@@ -48,6 +51,10 @@ void ConfigureServices(WebApplicationBuilder builder){
     builder.Services.AddValidatorsFromAssembly(assembly);
 
     builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
+    builder.Services.AddHealthChecks()
+        .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
+        .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
 }
 #endregion
 
@@ -56,5 +63,10 @@ void ConfigurePipeline(WebApplication app)
 {
     app.MapCarter();
     app.UseExceptionHandler(options => { });
+    app.UseHealthChecks("/health",
+        new HealthCheckOptions
+        {
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+        });
 }
 #endregion
